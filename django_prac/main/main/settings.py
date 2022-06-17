@@ -11,16 +11,29 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+import os
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-yc9ir5pn%)v=pz6d+*x4vufd3elizvex=8sn%hfoo%oq&k@w4_'
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+with open(secret_file, 'r', encoding='utf8') as f:
+    secrets = json.loads(f.read())
+
+def get_secret(key):
+    try:
+        return secrets[key]
+    except KeyError:
+        error_msg = f"{key} is not Correct Key."
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,11 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False # False로 설정해야 DB에 변경된 TIME_ZONE이 반영됨.
 
 
 # Static files (CSS, JavaScript, Images)
