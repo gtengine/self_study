@@ -16,5 +16,5 @@ console.log(dayOfWeek2);
 console.log(dayOfWeek2[5]); // sat
 console.log(dayOfWeek2);
 
-dayOfWeek2.push('sun')
+dayOfWeek2.push('sun') // 리스트에 새로운 값 추가
 console.log(dayOfWeek2)
