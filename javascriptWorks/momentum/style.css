@@ -1,16 +1,4 @@
-body {
-  background-color: beige;
+.hidden {
+  display: none;
 }
-
-h1 {
-  color: cornflowerblue;
-  transition: color 0.5s ease-in-out;
-}
-
-.clicked {
-  color: tomato;
-}
-
-.sexy-font {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
+/* 위 속성을 입력하면 해당 element를 숨길 수 있다. */
