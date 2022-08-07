@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
+// React Router: 페이지를 전환할 때 사용한다.
+// router는 URL을 보고있는 component이고 그에 따른 각 route(or page)를 보여준다.
+// App.js는 영화를 보여주지 않고 router를 rendering 해야한다.
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([]);
-  useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-      .then((response) => response.json())
-      .then((json) => {
-        setCoins(json);
-        setLoading(false);
-      });
-  }, []);
   return (
-    <div>
-      <h1>The Coins {loading ? "" : `(${coins.length})`}</h1>
-      {loading ? (
-        <strong>Loading...</strong>
-      ) : (
-        <select>
-          {coins.map((coin) => (
-            <option>
-              {coin.name} ({coin.symbol}): {coin.quotes.USD.price}
-            </option>
-          ))}
-        </select>
-      )}
-    </div>
+    <Router>
+      {/*
+      Switch component를 입력한 이유는 한 번에 하나의 Route만 rendering 하기 위해서이다.
+      React Router에서는 원한다면 여러 개의 Route를 한번에 rendering할 수 있다.
+      */}
+      <Switch>
+        <Route path="/movie">
+          <Detail />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
