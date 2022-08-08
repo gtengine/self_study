@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./styles.css";
 // css파일을 import 하여 적용시킨다.
 // import "./style.css";
 
