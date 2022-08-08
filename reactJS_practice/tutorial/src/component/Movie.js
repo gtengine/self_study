@@ -8,7 +8,7 @@ function Movie({ id, mediumCoverImage, title, summary, genres }) {
         <Link to={`/movie/${id}`}>{title}</Link>
       </h2>
       <img src={mediumCoverImage} alt={title} />
-      <p>{summary}</p>
+      <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
       <ul>
         {genres.map((genre) => (
           <li key={genre}>{genre}</li>
