@@ -14,7 +14,7 @@ function App() {
       React Router에서는 원한다면 여러 개의 Route를 한번에 rendering할 수 있다.
       */}
       <Switch>
-        <Route path="/movie">
+        <Route path="/movie/:id">
           <Detail />
         </Route>
         <Route path="/">

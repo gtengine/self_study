@@ -16,6 +16,7 @@ function Home() {
   useEffect(() => {
     getMoviews();
   }, []);
+  console.log(movies);
   return (
     <div>
       {loading ? (
@@ -26,6 +27,7 @@ function Home() {
             <Movie
               // key는 React.js에서 map안에서 component들을 render할 때 사용한다.
               key={movie.id}
+              id={movie.id}
               mediumCoverImage={movie.medium_cover_image}
               title={movie.title}
               summary={movie.summary}
