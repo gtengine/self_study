@@ -1,0 +1,196 @@
+upstream api {
+    server localhost:3000;
+    keepalive 32;
+}
+
+upstream 7001 {
+    server localhost:7001;
+    keepalive 32;
+}
+
+upstream 7002 {
+    server localhost:7002;
+    keepalive 32;
+}
+
+upstream 7003 {
+    server localhost:7003;
+    keepalive 32;
+}
+
+upstream 7004 {
+    server localhost:7004;
+    keepalive 32;
+}
+
+upstream 7005 {
+    server localhost:7005;
+    keepalive 32;
+}
+
+upstream 7006 {
+    server localhost:7006;
+    keepalive 32;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6001;
+	listen [::]:6001;
+
+	location / {
+		proxy_pass http://7001;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6002;
+	listen [::]:6002;
+
+	location / {
+		proxy_pass http://7002;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6003;
+	listen [::]:6003;
+
+	location / {
+		proxy_pass http://7003;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6004;
+	listen [::]:6004;
+
+	location / {
+		proxy_pass http://7004;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6005;
+	listen [::]:6005;
+
+	location / {
+		proxy_pass http://7005;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+server {
+	listen 6006;
+	listen [::]:6006;
+
+	location / {
+		proxy_pass http://7006;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+
+	location /api/ {
+		rewrite ^/api(/.*)$ $1 break;
+		proxy_pass http://api;
+    	proxy_http_version 1.1;
+    	proxy_set_header Upgrade $http_upgrade;
+    	proxy_set_header Connection 'upgrade';
+    	proxy_set_header Host $host;
+    	proxy_cache_bypass $http_upgrade;		
+	}
+}
+
+
+

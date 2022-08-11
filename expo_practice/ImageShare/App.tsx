@@ -1,10 +1,21 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 // project directory에서 이미지를 가져올 때.
 // import logo from "./assets/logo.png";
 import * as ImagePicker from "expo-image-picker";
+import * as Sharing from "expo-sharing";
 
 export default function App() {
+  const [selectedImage, setSelectedImage] = React.useState(null);
+
   let openImagePickerAsync = async () => {
     let permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -15,8 +26,36 @@ export default function App() {
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
+
+    if (pickerResult.cancelled === true) {
+      return;
+    }
+
+    setSelectedImage({ localUri: pickerResult.uri });
   };
+
+  let openShareDialogAsync = async () => {
+    if (Platform.OS === "web") {
+      alert(`Uh oh, sharing isn't available on your platform.`);
+      return;
+    }
+
+    await Sharing.shareAsync(selectedImage.localUri);
+  };
+
+  if (selectedImage !== null) {
+    return (
+      <View style={styles.container}>
+        <Image
+          source={{ uri: selectedImage.localUri }}
+          style={styles.thumbnail}
+        />
+        <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
+          <Text style={styles.buttonText}>Share this photo.</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   return (
     // 아래 `styles`에 정의한 각 element에 대한 style을 object 형태로 가져와서 사용한다.
     <View style={styles.container}>
@@ -35,7 +74,7 @@ export default function App() {
         onPress={openImagePickerAsync}
         style={{ backgroundColor: "blue" }}
       >
-        <Text style={{ fontSize: 20, color: "#fff" }}>Pick a photo</Text>
+        <Text style={styles.buttonText}>Pick a photo</Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,6 +87,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  thumbnail: {
+    width: 300,
+    height: 300,
+    resizeMode: "contain",
   },
   logo: {
     width: 305,
